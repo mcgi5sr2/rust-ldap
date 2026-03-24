@@ -1,0 +1,20 @@
+[package]
+name = "rust-ldap"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ldap3 = { version = "0.12.1", default-features = false, features = ["tls-rustls-ring"] }
+rustls = { version = "0.23", default-features = false, features = ["ring"] }
+rustls-pemfile = "2"
+rustls-native-certs = "0.8"
+tokio = { version = "1.50.0", features = ["full"] }
+thiserror = "2.0.18"
+serde = { version = "1.0.228", features = ["derive"] }
+tracing = "0.1.44"
+envy = "0.4.2"
+dotenvy = "0.15.7"
+
+[dev-dependencies]
+tokio = { version = "1.50.0", features = ["full", "test-util"] }
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
