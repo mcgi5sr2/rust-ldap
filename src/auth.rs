@@ -3,7 +3,7 @@ use tracing::{debug, warn};
 use crate::client::LdapClient;
 use crate::error::LdapError;
 use crate::model::{AuthResult, User};
-use crate::search::search_user;
+use crate::search::search_by_username;
 
 impl LdapClient {
     /// Auth user against AD
@@ -26,7 +26,7 @@ impl LdapClient {
         match result.rc {
             0 => {
                 debug!("bind successful for {}", upn);
-                let user = match search_user(&mut self.ldap, &self.config, username).await {
+                let user = match search_by_username(&mut self.ldap, &self.config, username).await {
                     Ok(Some(user)) => user,
                     Ok(None) => {
                         warn!("search found nothing for {}", upn);
