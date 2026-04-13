@@ -107,6 +107,19 @@ pub(crate) async fn search_by_display_name(
     search_one(ldap, config, &filter).await
 }
 
+pub(crate) async fn search_by_attribute(
+    ldap: &mut Ldap,
+    config: &Config,
+    attr: &str,
+    value: &str,
+) -> Result<Option<User>, LdapError> {
+    let escaped_attr = ldap_escape(attr.trim());
+    let escaped_value = ldap_escape(value.trim());
+    debug!("searching by attribute {}={}", escaped_attr, escaped_value);
+    let filter = format!("(&(objectClass=person)({}={}))", escaped_attr, escaped_value);
+    search_one(ldap, config, &filter).await
+}
+
 /// Try sAMAccountName → mail → displayName, return first match
 pub(crate) async fn search_by_any(
     ldap: &mut Ldap,

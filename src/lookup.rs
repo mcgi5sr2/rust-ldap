@@ -1,7 +1,7 @@
 use crate::client::LdapClient;
 use crate::error::LdapError;
 use crate::model::User;
-use crate::search::{search_by_any, search_by_display_name, search_by_mail, search_by_username};
+use crate::search::{search_by_any, search_by_attribute, search_by_display_name, search_by_mail, search_by_username};
 
 impl LdapClient {
     /// Look up a user by their sAMAccountName (Windows login name)
@@ -23,4 +23,10 @@ impl LdapClient {
     pub async fn search_by_any(&mut self, query: &str) -> Result<Option<User>, LdapError> {
         search_by_any(&mut self.ldap, &self.config, query).await
     }
+
+    /// Search by passed attribute, allows search by special attributes
+    pub async fn search_by_attribute(&mut self, attr: &str, value: &str) -> Result<Option<User>, LdapError> {
+    search_by_attribute(&mut self.ldap, &self.config, attr, value).await
+}
+
 }
