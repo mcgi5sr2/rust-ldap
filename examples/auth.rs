@@ -1,6 +1,6 @@
-use amrc_ldap::LdapClient;
-use amrc_ldap::config::Config;
-use amrc_ldap::config::TlsMode;
+use rust_ldap::LdapClient;
+use rust_ldap::config::Config;
+use rust_ldap::config::TlsMode;
 
 #[tokio::main]
 async fn main() {
