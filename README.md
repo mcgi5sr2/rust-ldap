@@ -1,4 +1,4 @@
-# amrc-ldap
+# rust-ldap
 
 A Rust library for authenticating users against LDAP/Active Directory servers.
 
@@ -9,9 +9,9 @@ Supports:
 ## Usage
 
 ```rust
-use amrc_ldap::LdapClient;
-use amrc_ldap::config::{Config, TlsMode};
-use amrc_ldap::model::AuthResult;
+use rust_ldap::LdapClient;
+use rust_ldap::config::{Config, TlsMode};
+use rust_ldap::model::AuthResult;
 
 #[tokio::main]
 async fn main() {
